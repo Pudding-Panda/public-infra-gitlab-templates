@@ -1,0 +1,24 @@
+variables:
+  DEBIAN_FRONTEND: "noninteractive"
+
+  DOCKER_HOST: "unix:///var/run/docker.sock"
+  DOCKER_TLS_CERTDIR: ""
+
+  GIT_DEPTH: 1
+  GIT_SUBMODULE_STRATEGY: "recursive"
+
+  NO_COLOR: "true"
+
+default:
+  interruptible: true
+  retry:
+      max: 1
+      when:
+        - unknown_failure
+        - runner_system_failure
+
+
+stages:
+  - build
+  - test
+  - deploy
